@@ -1,12 +1,10 @@
-var names = ['Alicaaaae', 'Emily', 'Kate'];
+  var HelloMessage = React.createClass({
+    render: function() {
+      return <h1>Hello {this.props.name}</h1>;
+    }
+  });
 
-ReactDOM.render(
-  <div>
-  {
-    names.map(function (name) {
-      return <div>Hello, {name}!</div>
-    })
-  }
-  </div>,
-  document.getElementById('example')
-);
+  ReactDOM.render(
+    <HelloMessage name="John" />,
+    document.getElementById('example')
+  );
