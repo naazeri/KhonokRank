@@ -8,14 +8,14 @@
  */
 class Poll {
     private $dbHost  = 'localhost';
-    private $dbUser  = 'nazeryir_pyreza';
-    private $dbPwd   = 'F,r*J^_90tNBoc?v~,';
-    private $dbName  = 'nazeryir_poll_system';            
+    private $dbUser  = 'root';
+    private $dbPwd   = '';
+    private $dbName  = 'poll_db';
     private $db      = false;
     private $pollTbl = 'polls';
     private $optTbl  = 'poll_options';
     private $voteTbl = 'poll_votes';
-    
+
     public function __construct() {
         if (!$this->db) {
             // Connect to the database
@@ -30,7 +30,7 @@ class Poll {
             }
         }
     }
-    
+
     /*
      * Runs query to the database
      * @param string SQL
@@ -57,7 +57,7 @@ class Poll {
         }
         return !empty($data)?$data:false;
     }
-    
+
     /*
      * Get polls data
      * Returns single or multiple poll data with respective options
@@ -85,7 +85,7 @@ class Poll {
         }
         return !empty($pollData)?$pollData:false;
     }
-    
+
     /*
      * Submit vote
      * @param array of poll option data
@@ -106,7 +106,7 @@ class Poll {
             return true;
         }
     }
-    
+
     /*
      * Get poll result
      * @param poll ID
@@ -123,7 +123,7 @@ class Poll {
                 $optResult = $this->getQuery($sql2);
                 if(!empty($optResult)){
                     foreach($optResult as $orow){
-                        $resultData['options'][$orow['name']] = $orow['vote_count']; 
+                        $resultData['options'][$orow['name']] = $orow['vote_count'];
                     }
                 }
             }
