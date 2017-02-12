@@ -24,60 +24,34 @@ if(isset($_POST['voteSubmit'])){
 <html lang="en-US">
 <head>
 <meta charset="UTF-8" />
-<style type="text/css">
-.pollContent{
-    float: left;
-    width: 500px;
-}
-.pollContent h3 {
-    font-size: 18px;
-    color: #333;
-    text-align: left;
-    float: left;
-    border-bottom: 2px solid #333;
-    width: 100%;
-    margin: 0 auto;
-    padding-bottom: 10px;
-}
-.pollContent ul{
-    list-style: none;
-    float: left;
-    width: 100%;
-    padding: 10px;
-}
-.pollContent input[type="submit"], .pollContent a{
-    border: none;
-    font-size: 16px;
-    color: #fff;
-    border-radius: 3px;
-    padding: 10px 15px 10px 15px; 
-    background-color: #34a853;
-    text-decoration: none;
-    cursor: pointer;
-}
-.stmsg{font-size: 16px;color:#FBBC05;}
-</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+
 </head>
 <body>
-<div class="container">
-    <?php
-        //Get poll and options data
-        $pollData = $poll->getPolls();
-    ?>
-    <div class="pollContent">
-        <?php echo !empty($statusMsg)?'<p class="stmsg">'.$statusMsg.'</p>':''; ?>
+    <div class="container-fluid">
+        <?php
+            //Get poll and options data
+            $pollData = $poll->getPolls();
+        ?>
+        <p class="text-center"><?php echo !empty($statusMsg)? $statusMsg : ''; ?></p>
+
         <form action="" method="post" name="pollFrm">
-        <h3><?php echo $pollData['poll']['subject']; ?></h3>
-        <ul>
-            <?php foreach($pollData['options'] as $opt){
-                echo '<li><input type="radio" name="voteOpt" value="'.$opt['id'].'" >'.$opt['name'].'</li>';
-            } ?>
-        </ul>
-        <input type="hidden" name="pollID" value="<?php echo $pollData['poll']['id']; ?>">
-        <input type="submit" name="voteSubmit" class="button" value="Vote">
-        <a href="results.php?pollID=<?php echo $pollData['poll']['id']; ?>">Results</a>
+            <h3 class="text-center"><?php echo $pollData['poll']['subject']; ?></h3>
+            <ul>
+                <?php foreach($pollData['options'] as $opt){
+                    echo '<li><input type="radio" name="voteOpt" value="'.$opt['id'].'" >'.$opt['name'].'</li>';
+                } ?>
+            </ul>
+            <input type="hidden" name="pollID" value="<?php echo $pollData['poll']['id']; ?>">
+            <div class="row">
+                <div class="col-xs-2">
+                    <input type="submit" name="voteSubmit" class="btn btn-success" value="Vote">
+                </div>
+                <div class="col-xs-2">
+                    <a class="btn btn-info" href="results.php?pollID=<?php echo $pollData['poll']['id']; ?>">Results</a>
+                </div>
+            </div>
         </form>
     </div>
-</div>
 </body>
 </html>
